@@ -1,2 +1,2 @@
-#!/bin/bash [D
-gcc -E $CFILE -0 c
+#!/bin/bash
+gcc $CFILE -E -0 c
