@@ -5,100 +5,46 @@
  * @str: string of words to be split
  * Return: double pointer to strings
  */
-char **strtow(char *str)
+
+void main()
 {
-	char **ptr;
-	int i, k, len, start, end, j = 0;
-	int words =  countWords(str);
+  int i;
+  int myargc = 1;
+  char *myargv[256];
+  char buff[100];
+  int len = 0;
+  char string[256];
+  int j = 0;
 
-	if (!str || !countWords(str))
-		return (NULL);
-	ptr = malloc(sizeof(char *) * (words + 1));
-	if (!ptr)
-		return (NULL);
-	for (i = 0; i < words; i++)
-	{
-		start = startIndex(str, j);
-		end = endIndex(str, start);
-		len = end - start;
-		ptr[i] = malloc(sizeof(char) * (len + 1));
-		if (!ptr[i])
-		{
-			i -= 1;
-			while (i >= 0)
-			{
-				free(ptr[i]);
-					i--;
-			}
-			free(ptr);
-			return (NULL);
-		}
-		for (k = 0; k < len; k++)
-			ptr[i][k] = str[start++];
-		ptr[i][k++] = '\0';
-		j = end + 1;
-	}
-	ptr[i] = NULL;
-	return (ptr);
-}
+  printf("Enter text: ");
+  gets(buff);
 
-/**
- * isSpace - determines if character is a space or not
- * @c: input char
- * Return: 1 if true or 0 or not
- */
-int isSpace(char c)
-{
-	return (c == ' ');
-}
+  for(i = 0; buff[i] != '\0'; i++){
+    len++;
+  }
 
-/**
- * startIndex - returns first index of non-space char
- * @s: input string
- * @index: starting index
- * Return: index of first non-space char
- */
-int startIndex(char *s, int index)
-{
-
-	while (isSpace(*(s + index)))
-		index++;
-	return (index);
-}
-
-/**
- * endIndex - returns last index of non-space char
- * @s: input string
- * @index: starting index
- * Return: index of last index of non-space char
- */
-int endIndex(char *s, int index)
-{
-	while (!isSpace(*(s + index)))
-		index++;
-	return (index);
-}
-
-/**
- * countWords - counts numbers of words in string
- * @s: input string
- * Return: number of words
- */
-int countWords(char *s)
-{
-	int wordOn = 0;
-	int words = 0;
-
-	while (*s)
-	{
-		if (isSpace(*s) && wordOn)
-			wordOn = 0;
-		else if (!isSpace(*s) && !wordOn)
-		{
-			wordOn = 1;
-			words++;
-		}
-		s++;
-	}
-	return (words);
+  for(i = 0; i < len; i++)
+    {
+      if(buff[i]!=' ' && buff[i+1]==' ')
+        {
+	  myargc++;
+        }
+    }
+  printf("myargc %d\n",myargc);
+  **for(i = 0; i < len; i++){
+    if(buff[i] != ' '){
+      string[j++] = buff[i];
+    }
+    if(buff[i] != ' ' && buff[i] == ' '){
+      string[j++] = '\0';
+      j = 0;
+    }
+    if(buff[i] == '\0'){
+      break;
+    }
+  }**
+     for(i = 0; i < myargc - 1; i++){
+       myargv[i] = string;
+       printf("argv[%d]\t%s\n", i, myargv[i]);
+     }
 }
