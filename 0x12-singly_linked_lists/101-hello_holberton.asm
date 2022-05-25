@@ -13,8 +13,3 @@ main:
 
 	mov eax, 0
 	ret
-
-    © 2022 GitHub, Inc.
-
-    Terms
-    Privacy
